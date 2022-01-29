@@ -27,29 +27,33 @@ public class MyFirstRobot {
         motorRight.brake();
 
         System.out.println("Defining motor speed");
-        final int motorSpeed = 200;
+        final int motorSpeed = 360;
         motorLeft.setSpeed(motorSpeed);
         motorRight.setSpeed(motorSpeed);
 
-        System.out.println("Go Forward with the motors");
-        motorLeft.forward();
-        motorRight.forward();
+//        System.out.println("Go Forward with the motors");
+//        motorLeft.forward();
+//        motorRight.forward();
 
-        Delay.msDelay(2000);
+//        Delay.msDelay(2000);
 
-        System.out.println("Stop motors");
-        motorLeft.stop();
-        motorRight.stop();
+//        System.out.println("Stop motors");
+//        motorLeft.stop();
+//        motorRight.stop();
 
-        System.out.println("Go Backward with the motors");
-        motorLeft.backward();
-        motorRight.backward();
+//        System.out.println("Go Backward with the motors");
+//        motorLeft.backward();
+//        motorRight.backward();
 
-        Delay.msDelay(2000);
+//        Delay.msDelay(2000);
 
-        System.out.println("Stop motors");
-        motorLeft.stop();
-        motorRight.stop();
+        System.out.println("360 motors");
+        motorLeft.rotate(360, true);
+        motorRight.rotate(360, true);
+
+//        System.out.println("Stop motors");
+//        motorLeft.brake();
+//        motorRight.brake();
 
         System.out.println("Checking Battery");
         System.out.println("Votage: " + Battery.getInstance().getVoltage());

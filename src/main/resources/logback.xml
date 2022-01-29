@@ -2,22 +2,34 @@
 <configuration>
 
     <jmxConfigurator />
+    <property name="LOG_DIR" value="/home/robot/log"/>
 
     <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
         <target>System.err</target>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
-            </Pattern>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss,SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
         </encoder>
     </appender>
-
-    <logger name="ch.qos.logback.core" level="OFF" />
+    <appender name="APP_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/fish_info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_DIR}/fish_info.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss,SSS}] [%-5level] [%thread] [%logger:%line]--%mdc{client} %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="ch.qos.logback.core" level="INFO" />
     <logger name="ev3dev.hardware" level="TRACE" />
     <logger name="ev3dev.utils" level="TRACE" />
 
-    <root level="TRACE">
-        <appender-ref ref="STDERR"/>
+    <root level="INFO">
+<!--        <appender-ref ref="STDERR"/>-->
+        <appender-ref ref="APP_INFO"/>
     </root>
 
 </configuration>

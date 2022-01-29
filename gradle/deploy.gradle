@@ -94,7 +94,10 @@ task deploy {
     doLast {
         ssh.run {
             session(remotes.ev3dev) {
+                println "scp " + "${rootProject.name}" + "-" + version + ".jar " +  remotes.ev3dev.user + "@" + remotes.ev3dev.host + ":/home/robot"
                 put from: "${projectDir}/build/libs/" + "${rootProject.name}" + "-" + version + ".jar", into: "/home/robot/"
+                execute "echo 'nohup java -jar " + "${rootProject.name}" + "-" + version + ".jar &' > /home/robot/launchJava.sh"
+                execute "chmod +x /home/robot/launchJava.sh"
             }
         }
     }
